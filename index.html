@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Marking</title>
+</head>
+<body>
+    <h1>Attendance Marking</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Attendance</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>
+                <button onclick="markAttendance('{{ student.id }}')">Mark Attendance</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <script>
+        function markAttendance(studentId) {
+            fetch('/mark_attendance', {
+                method: 'POST',
+                body: new URLSearchParams(`student_id=${studentId}`)
+            });
+        }
+    </script>
+</body>
+</html>
