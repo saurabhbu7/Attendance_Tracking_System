@@ -120,8 +120,11 @@ const TableComponent = ({ data, setStudentData }) => {
 			)
 			: data;
 		setFilteredData(filtered);
-		setCurrentPage(0); // Reset to first page on new search
 	}, [searchTerm, data]);
+
+	useEffect(() => {
+        setCurrentPage(0);
+    }, [searchTerm]);
 
 	const paginatedData = filteredData.slice(
 		currentPage * pageSize,
@@ -169,7 +172,7 @@ const TableComponent = ({ data, setStudentData }) => {
 								Student Name
 							</th>
 							<th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-								Phone no.
+								Class
 							</th>
 							<th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 								Mark Attendance
@@ -186,7 +189,7 @@ const TableComponent = ({ data, setStudentData }) => {
 									{student.StudentName}
 								</td>
 								<td className="py-2 px-4 border-b border-gray-200 text-[#2D2D2D]">
-									{student.PhoneNo}
+									{student.ClassName}
 								</td>
 								<td className="py-2 px-4 border-b border-gray-200 text-[#2D2D2D]">
 									<Switch

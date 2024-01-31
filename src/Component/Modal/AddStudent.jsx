@@ -8,7 +8,7 @@ function AddStudent({ setModal }) {
         const studentData = window.localStorage.getItem("students")
         if (studentData) {
             const parsedData = JSON.parse(studentData)
-            let updatedData = [...parsedData, { StudentID: `0${parsedData.length + 1}`, StudentName: event.target.name.value, PhoneNo: event.target.number.value }]
+            let updatedData = [...parsedData, { StudentID: `0${parsedData.length + 1}`, StudentName: event.target.name.value, ClassName: event.target.class.value }]
             window.localStorage.setItem("students", JSON.stringify(updatedData))
         }
         Navigate('/dashboard')
@@ -29,9 +29,9 @@ function AddStudent({ setModal }) {
                     </div>
                     <div className='w-full flex flex-col gap-2'>
                         <span className='text-base font-semibold'>
-                            {`Phone Number`}
+                            {`Class Name`}
                         </span>
-                        <input name='number' className='w-full h-[40px] bg-white border border-gray-400 focus:border-[#53D0A4] outline-none text-base text-black rounded-md px-3' type='text' placeholder='Enter Number' />
+                        <input name='class' className='w-full h-[40px] bg-white border border-gray-400 focus:border-[#53D0A4] outline-none text-base text-black rounded-md px-3' type='text' placeholder='Enter Class Name' />
                     </div>
                 </div>
                 <div className='w-full flex justify-end items-center mt-5 select-none'>

@@ -5,40 +5,32 @@ import { useNavigate } from "react-router-dom";
 function Login() {
 	const naviagte = useNavigate()
 	const InitialData = [
-		{ StudentID: '001', StudentName: 'Alex Smith', PhoneNo: '+23 4570 000', Attendance: 0 },
-		{ StudentID: '002', StudentName: 'Maria Johnson', PhoneNo: '+23 4570 173', Attendance: 0 },
-		{ StudentID: '003', StudentName: 'James Williams', PhoneNo: '+23 4570 246', Attendance: 0 },
-		{ StudentID: '004', StudentName: 'Emily Jones', PhoneNo: '+23 4570 319', Attendance: 0 },
-		{ StudentID: '005', StudentName: 'Daniel Brown', PhoneNo: '+23 4570 482', Attendance: 0 },
-		{ StudentID: '006', StudentName: 'Chloe Davis', PhoneNo: '+23 4570 555', Attendance: 0 },
-		{ StudentID: '007', StudentName: 'Oliver Miller', PhoneNo: '+23 4570 628', Attendance: 0 },
-		{ StudentID: '008', StudentName: 'Sophia Wilson', PhoneNo: '+23 4570 791', Attendance: 0 },
-		{ StudentID: '009', StudentName: 'Liam Moore', PhoneNo: '+23 4570 864', Attendance: 0 },
-		{ StudentID: '010', StudentName: 'Isabella Taylor', PhoneNo: '+23 4570 937', Attendance: 0 },
-		{ StudentID: '011', StudentName: 'Ethan Anderson', PhoneNo: '+23 4571 000', Attendance: 0 },
-		{ StudentID: '012', StudentName: 'Mia Thomas', PhoneNo: '+23 4571 173', Attendance: 0 },
-		{ StudentID: '013', StudentName: 'Noah Jackson', PhoneNo: '+23 4571 246', Attendance: 0 },
-		{ StudentID: '014', StudentName: 'Ava White', PhoneNo: '+23 4571 319', Attendance: 0 },
-		{ StudentID: '015', StudentName: 'Lucas Harris', PhoneNo: '+23 4571 482', Attendance: 0 },
-		{ StudentID: '016', StudentName: 'Emma Martin', PhoneNo: '+23 4571 555', Attendance: 0 },
-		{ StudentID: '017', StudentName: 'Mason Thompson', PhoneNo: '+23 4571 628', Attendance: 0 },
-		{ StudentID: '018', StudentName: 'Charlotte Garcia', PhoneNo: '+23 4571 791', Attendance: 0 },
-		{ StudentID: '019', StudentName: 'Logan Martinez', PhoneNo: '+23 4571 864', Attendance: 0 },
-		{ StudentID: '020', StudentName: 'Amelia Robinson', PhoneNo: '+23 4571 937', Attendance: 0 },
-		{ StudentID: '021', StudentName: 'Benjamin Clark', PhoneNo: '+23 4572 000', Attendance: 0 },
-		{ StudentID: '022', StudentName: 'Harper Rodriguez', PhoneNo: '+23 4572 173', Attendance: 0 },
-		{ StudentID: '023', StudentName: 'Carter Lewis', PhoneNo: '+23 4572 246', Attendance: 0 },
-		{ StudentID: '024', StudentName: 'Evelyn Lee', PhoneNo: '+23 4572 319', Attendance: 0 },
-		{ StudentID: '025', StudentName: 'William Walker', PhoneNo: '+23 4572 482', Attendance: 0 }
+		{ StudentID: '001', StudentName: 'Alex Smith', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '002', StudentName: 'Maria Johnson', ClassName: '9th', Attendance: 0 },
+		{ StudentID: '003', StudentName: 'James Williams', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '004', StudentName: 'Emily Jones', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '005', StudentName: 'Daniel Brown', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '006', StudentName: 'Chloe Davis', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '007', StudentName: 'Oliver Miller', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '008', StudentName: 'Sophia Wilson', ClassName: '9th', Attendance: 0 },
+		{ StudentID: '009', StudentName: 'Liam Moore', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '010', StudentName: 'Isabella Taylor', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '011', StudentName: 'Ethan Anderson', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '012', StudentName: 'Mia Thomas', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '013', StudentName: 'Noah Jackson', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '014', StudentName: 'Ava White', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '015', StudentName: 'Lucas Harris', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '016', StudentName: 'Emma Martin', ClassName: '9th', Attendance: 0 },
+		{ StudentID: '017', StudentName: 'Mason Thompson', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '018', StudentName: 'Charlotte Garcia', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '019', StudentName: 'Logan Martinez', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '020', StudentName: 'Amelia Robinson', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '021', StudentName: 'Benjamin Clark', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '022', StudentName: 'Harper Rodriguez', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '023', StudentName: 'Carter Lewis', ClassName: '9th', Attendance: 0 },
+		{ StudentID: '024', StudentName: 'Evelyn Lee', ClassName: '10th', Attendance: 0 },
+		{ StudentID: '025', StudentName: 'William Walker', ClassName: '10th', Attendance: 0 }
 	]
-	// const InitialData = [
-	// 	{ StudentID: '001', StudentName: 'John Bailey', PhoneNo: '+23 4567 123', Attendance: 0 },
-	// 	{ StudentID: '002', StudentName: 'John Bailey', PhoneNo: '+23 4567 123', Attendance: 0 },
-	// 	{ StudentID: '003', StudentName: 'John Bailey', PhoneNo: '+23 4567 123', Attendance: 0 },
-	// 	{ StudentID: '004', StudentName: 'John Bailey', PhoneNo: '+23 4567 123', Attendance: 0 },
-	// 	{ StudentID: '005', StudentName: 'John Bailey', PhoneNo: '+23 4567 123', Attendance: 0 },
-	// 	{ StudentID: '006', StudentName: 'John Doe', PhoneNo: '+23 4567 123', Attendance: 0 }
-	// ]
 	useEffect(() => {
 		const data = window.localStorage.getItem("students")
 		if (!data) {

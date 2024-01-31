@@ -60,7 +60,7 @@ function SettingsTable({ data }) {
                             Student Name
                         </th>
                         <th className="py-3 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                            Phone no.
+                            Class
                         </th>
                         <th className="py-3 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
                             Actions
@@ -78,7 +78,7 @@ function SettingsTable({ data }) {
                                     {student.StudentName}
                                 </td>
                                 <td className="py-3 px-4 border-b border-gray-200 text-[#2D2D2D] min-h-[52px]">
-                                    {student.PhoneNo}
+                                    {student.ClassName}
                                 </td>
                                 <td className="py-3 px-4 border-b border-gray-200 text-[#2D2D2D] min-h-[52px] flex items-center gap-6">
                                     <img className='cursor-pointer' src="/edit.svg" alt="edit" />
