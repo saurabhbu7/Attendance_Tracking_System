@@ -7,7 +7,7 @@ function DashboardLayout() {
 	const Location = useLocation();
 	return (
 		<div className="flex max-w-screen min-h-screen bg-gray-100">
-			
+
 			<div className="w-[240px] hidden lg:block">
 				<Sidebar Location={Location} />
 			</div>
@@ -15,7 +15,7 @@ function DashboardLayout() {
 				<TopBar />
 				<Outlet />
 			</div>
-			
+
 		</div>
 	);
 }
@@ -44,16 +44,16 @@ const TopBar = () => {
 								rx="7.49047"
 								ry="7.11594"
 								stroke="#8B8B8B"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 							<path
 								d="M15.0153 14.6341L17.9519 17.4167"
 								stroke="#8B8B8B"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 						</svg>
 					</button>
@@ -86,11 +86,10 @@ const Sidebar = ({ Location }) => {
 				<div className="flex flex-col w-full py-4">
 					<NavLink
 						to="/dashboard"
-						className={`flex gap-3 p-4 font-medium text-md  ${
-							Location.pathname === "/dashboard"
+						className={`flex gap-3 p-4 font-medium text-md  ${Location.pathname === "/dashboard"
 								? " bg-[#F5F5F5]  text-black "
 								: " text-[#8B8B8B]"
-						}`}
+							}`}
 					>
 						<span className="menu-icon">
 							{" "}
@@ -104,11 +103,10 @@ const Sidebar = ({ Location }) => {
 					</NavLink>
 					<NavLink
 						to="/dashboard/settings"
-						className={`flex gap-3 p-4 font-medium text-md ${
-							Location.pathname === "/dashboard/settings"
+						className={`flex gap-3 p-4 font-medium text-md ${Location.pathname === "/dashboard/settings"
 								? " bg-[#F5F5F5]  text-black "
 								: " text-[#8B8B8B]"
-						}`}
+							}`}
 					>
 						<span className="menu-icon">
 							{" "}
@@ -142,8 +140,8 @@ function DashboardIconInActive() {
 					fill="#8B8B8B"
 				/>
 				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
+					fillRule="evenodd"
+					clipRule="evenodd"
 					d="M5.10584 2.08331H8.91505C10.4926 2.08331 11.7709 3.27691 11.7709 4.74994V8.30678C11.7709 9.77981 10.4926 10.9734 8.91505 10.9734H5.10584C3.52829 10.9734 2.25 9.77981 2.25 8.30678V4.74994C2.25 3.27691 3.52829 2.08331 5.10584 2.08331ZM5.10584 14.0266H8.91505C10.4926 14.0266 11.7709 15.2202 11.7709 16.6932V20.25C11.7709 21.7221 10.4926 22.9166 8.91505 22.9166H5.10584C3.52829 22.9166 2.25 21.7221 2.25 20.25V16.6932C2.25 15.2202 3.52829 14.0266 5.10584 14.0266ZM21.8942 14.0266H18.0849C16.5074 14.0266 15.2291 15.2202 15.2291 16.6932V20.25C15.2291 21.7221 16.5074 22.9166 18.0849 22.9166H21.8942C23.4717 22.9166 24.75 21.7221 24.75 20.25V16.6932C24.75 15.2202 23.4717 14.0266 21.8942 14.0266Z"
 					fill="#8B8B8B"
 				/>
@@ -167,8 +165,8 @@ function DashboardIconActive() {
 				fill="#FCA63A"
 			/>
 			<path
-				fill-rule="evenodd"
-				clip-rule="evenodd"
+				fillRule="evenodd"
+				clipRule="evenodd"
 				d="M5.10584 2.08331H8.91505C10.4926 2.08331 11.7709 3.27691 11.7709 4.74994V8.30678C11.7709 9.77981 10.4926 10.9734 8.91505 10.9734H5.10584C3.52829 10.9734 2.25 9.77981 2.25 8.30678V4.74994C2.25 3.27691 3.52829 2.08331 5.10584 2.08331ZM5.10584 14.0266H8.91505C10.4926 14.0266 11.7709 15.2202 11.7709 16.6932V20.25C11.7709 21.7221 10.4926 22.9166 8.91505 22.9166H5.10584C3.52829 22.9166 2.25 21.7221 2.25 20.25V16.6932C2.25 15.2202 3.52829 14.0266 5.10584 14.0266ZM21.8942 14.0266H18.0849C16.5074 14.0266 15.2291 15.2202 15.2291 16.6932V20.25C15.2291 21.7221 16.5074 22.9166 18.0849 22.9166H21.8942C23.4717 22.9166 24.75 21.7221 24.75 20.25V16.6932C24.75 15.2202 23.4717 14.0266 21.8942 14.0266Z"
 				fill="#FCA63A"
 			/>

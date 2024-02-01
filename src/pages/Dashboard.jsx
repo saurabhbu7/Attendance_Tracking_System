@@ -1,23 +1,40 @@
-import { useLocalStorage } from "@uidotdev/usehooks";
 import React, { useEffect, useState } from "react";
 import Switch from "react-switch";
+import { DateProvider } from "../helper/utility";
 
 function Dashboard() {
 	const [studentData, setStudentData] = useState([]);
-	useEffect(() => {
-		console.log(window.localStorage.getItem("students"));
-		const data = window.localStorage.getItem("students");
-		if (data) {
-			setStudentData(JSON.parse(data));
+	const [selectedDate, setSelectedDate] = useState(DateProvider());
+
+	function DateHandler(event) {
+		event.preventDefault()
+		const attendance = window.localStorage.getItem('attendance')
+		const students = window.localStorage.getItem('students')
+		if (attendance && students) {
+			const attData = JSON.parse(attendance)
+			const studentsData = JSON.parse(students)
+			if (attData[event.target.date.value] === undefined) {
+				let updatedData = { ...attData, [event.target.date.value]: studentsData?.map((items) => { return { StudentID: items?.StudentID, StudentName: items?.StudentName, ClassName: items?.ClassName, Attendance: false } }) }
+				window.localStorage.setItem('attendance', JSON.stringify(updatedData))
+				setStudentData(studentsData?.map((items) => { return { StudentID: items?.StudentID, StudentName: items?.StudentName, ClassName: items?.ClassName, Attendance: false } }))
+				setSelectedDate(event.target.date.value)
+			} else {
+				setStudentData(attData[event.target.date.value])
+				setSelectedDate(event.target.date.value)
+			}
 		}
+	}
+
+	useEffect(() => {
+		const data = window.localStorage.getItem('attendance');
+		if (data) setStudentData(JSON.parse(data)[DateProvider()])
 	}, []);
 
 	useEffect(() => {
-		if (studentData.length)
-			window.localStorage.setItem(
-				"students",
-				JSON.stringify(studentData)
-			);
+		if (studentData.length) {
+			const data = window.localStorage.getItem('attendance')
+			if (data) window.localStorage.setItem('attendance', JSON.stringify({ ...JSON.parse(data), [selectedDate]: studentData }))
+		}
 	}, [studentData]);
 
 	return (
@@ -27,52 +44,47 @@ function Dashboard() {
 					Dashboard
 				</h1>
 				<div className="flex gap-4">
-					<div className="flex gap-2 justify-between w-[200px] items-center border-gray-300 border px-2 font-medium py-1 rounded">
-						<span> 31-Jan-2024 </span>
-						<DateIcon />
-					</div>
-					{/* <button className="text-white bg-[#FCA63A] font-bold rounded px-3 py-1">
-						{" "}
-						Add Student
-					</button> */}
+					<form
+						onSubmit={DateHandler}
+						className="flex items-center gap-2"
+					>
+						<input defaultValue={DateProvider()} name="date" className="w-[200px] h-[35px] p-1 px-2 border border-gray-300 outline-none bg-white rounded-md" type="date" pattern="\d{4}-\d{2}-\d{2}" />
+						<button className="h-[35px] px-5 text-sm font-semibold text-white bg-[#fca63a] rounded-md">
+							{`Add`}
+						</button>
+					</form>
 				</div>
 			</div>
 
 			<div className="p-4 mt-8">
-				{ studentData && <Stats studentData={studentData} /> }
+				{studentData && <Stats studentData={studentData} />}
 			</div>
 
 			<div className="p-4 mt-8">
-				{studentData && (
+				{
+					studentData &&
 					<TableComponent
 						data={studentData}
 						setStudentData={setStudentData}
 					/>
-				)}
+				}
 			</div>
 		</div>
 	);
 }
 
-const Stats = ({studentData}) => {
+const Stats = ({ studentData }) => {
 	const calculateAttendance = () => {
 		let present = 0;
 		let absent = 0;
-	
+
 		studentData.forEach(student => {
-			if (student.Attendance == 1) {
-			  present += 1;
-			} else {
-			  absent += 1;
-			}
-		  });
-		
-	
+			if (student.Attendance === true) present += 1
+			else absent += 1;
+		});
 		return { present, absent };
-	  };
-	
-	// Calculate attendance stats
-	const { present, absent } = calculateAttendance(); 
+	};
+	const { present, absent } = calculateAttendance();
 	const data = [
 		{
 			title: "Total Students",
@@ -89,17 +101,18 @@ const Stats = ({studentData}) => {
 	];
 	return (
 		<div className="flex flex-wrap -mx-6">
-			{/* Card component repeated for each stat */}
-			{data.map((d, i) => {
-				return (
-					<div className="w-full md:w-1/3 px-4">
-						<div className="border border-gray-200 rounded-lg bg-white p-6 py-8">
-							<div className="text-4xl font-bold">{d.value}</div>
-							<div className="text-gray-600">{d.title}</div>
+			{
+				data.map((d, i) => {
+					return (
+						<div key={i} className="w-full md:w-1/3 px-4">
+							<div className="border border-gray-200 rounded-lg bg-white p-6 py-8">
+								<div className="text-4xl font-bold">{d.value}</div>
+								<div className="text-gray-600">{d.title}</div>
+							</div>
 						</div>
-					</div>
-				);
-			})}
+					);
+				})
+			}
 		</div>
 	);
 };
@@ -112,19 +125,17 @@ const TableComponent = ({ data, setStudentData }) => {
 
 	useEffect(() => {
 		// Filter data based on search term across all properties
-		const filtered = searchTerm
-			? data.filter((item) =>
-				Object.values(item).some(value =>
-					value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-				)
+		const filtered = searchTerm ? data.filter((item) =>
+			Object.values(item).some(value =>
+				value.toString().toLowerCase().includes(searchTerm.toLowerCase())
 			)
-			: data;
+		) : data;
 		setFilteredData(filtered);
 	}, [searchTerm, data]);
 
 	useEffect(() => {
-        setCurrentPage(0);
-    }, [searchTerm]);
+		setCurrentPage(0);
+	}, [searchTerm]);
 
 	const paginatedData = filteredData.slice(
 		currentPage * pageSize,
@@ -140,9 +151,7 @@ const TableComponent = ({ data, setStudentData }) => {
 
 	const handleAttendanceToggle = (studentId, checked) => {
 		const updatedData = data.map((student) =>
-			student.StudentID === studentId
-				? { ...student, Attendance: checked }
-				: student
+			student.StudentID === studentId ? { ...student, Attendance: checked } : student
 		);
 		setStudentData(updatedData);
 	};
@@ -180,30 +189,27 @@ const TableComponent = ({ data, setStudentData }) => {
 						</tr>
 					</thead>
 					<tbody className="text-sm">
-						{paginatedData.map((student, index) => (
-							<tr key={student.StudentID}>
-								<td className="py-2 px-4 border-b border-gray-200 text-[#2D2D2D]">
-									{student.StudentID}
-								</td>
-								<td className="py-2 px-4 border-b border-gray-200 text-[#2D2D2D]">
-									{student.StudentName}
-								</td>
-								<td className="py-2 px-4 border-b border-gray-200 text-[#2D2D2D]">
-									{student.ClassName}
-								</td>
-								<td className="py-2 px-4 border-b border-gray-200 text-[#2D2D2D]">
-									<Switch
-										onChange={(checked) =>
-											handleAttendanceToggle(
-												student.StudentID,
-												checked
-											)
-										}
-										checked={student.Attendance}
-									/>
-								</td>
-							</tr>
-						))}
+						{
+							paginatedData.map((student) => (
+								<tr key={student.StudentID}>
+									<td className="py-2 px-4 border-b border-gray-200 text-[#2D2D2D]">
+										{student.StudentID}
+									</td>
+									<td className="py-2 px-4 border-b border-gray-200 text-[#2D2D2D]">
+										{student.StudentName}
+									</td>
+									<td className="py-2 px-4 border-b border-gray-200 text-[#2D2D2D]">
+										{student.ClassName}
+									</td>
+									<td className="py-2 px-4 border-b border-gray-200 text-[#2D2D2D]">
+										<Switch
+											onChange={(checked) => handleAttendanceToggle(student.StudentID, checked)}
+											checked={student.Attendance}
+										/>
+									</td>
+								</tr>
+							))
+						}
 					</tbody>
 				</table>
 			</div>
