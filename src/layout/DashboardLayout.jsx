@@ -5,6 +5,7 @@ import user from "../user.png";
 
 function DashboardLayout() {
 	const Location = useLocation();
+	const naviagte = useNavigate();
 	return (
 		<div className="flex max-w-screen min-h-screen bg-gray-100">
 
@@ -12,7 +13,7 @@ function DashboardLayout() {
 				<Sidebar Location={Location} />
 			</div>
 			<div className="flex-grow flex flex-col">
-				<TopBar />
+				<TopBar naviagte={naviagte} />
 				<Outlet />
 			</div>
 
@@ -20,7 +21,7 @@ function DashboardLayout() {
 	);
 }
 
-const TopBar = () => {
+const TopBar = ({ naviagte }) => {
 	return (
 		<div className="bg-[#FCA63A] shadow-md h-16 flex items-center justify-between px-6">
 			<div className="flex items-center">
@@ -62,7 +63,11 @@ const TopBar = () => {
 
 			<div className="flex items-center">
 				<img
-					className="h-10 w-10 rounded-full object-cover"
+					onClick={() => {
+						window.localStorage.clear()
+						naviagte('/')
+					}}
+					className="h-10 w-10 rounded-full object-cover cursor-pointer"
 					src={user}
 					alt="Profile"
 				/>
@@ -86,10 +91,7 @@ const Sidebar = ({ Location }) => {
 				<div className="flex flex-col w-full py-4">
 					<NavLink
 						to="/dashboard"
-						className={`flex gap-3 p-4 font-medium text-md  ${Location.pathname === "/dashboard"
-								? " bg-[#F5F5F5]  text-black "
-								: " text-[#8B8B8B]"
-							}`}
+						className={`flex gap-3 p-4 font-medium text-md  ${Location.pathname === "/dashboard" ? " bg-[#F5F5F5]  text-black " : "text-[#8B8B8B]"}`}
 					>
 						<span className="menu-icon">
 							{" "}
@@ -104,8 +106,8 @@ const Sidebar = ({ Location }) => {
 					<NavLink
 						to="/dashboard/settings"
 						className={`flex gap-3 p-4 font-medium text-md ${Location.pathname === "/dashboard/settings"
-								? " bg-[#F5F5F5]  text-black "
-								: " text-[#8B8B8B]"
+							? " bg-[#F5F5F5]  text-black "
+							: " text-[#8B8B8B]"
 							}`}
 					>
 						<span className="menu-icon">
